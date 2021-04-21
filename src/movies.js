@@ -44,9 +44,9 @@ function dramaMoviesRate(movies) {
      return movie.genre.includes('Drama')});
      return ratesAverage(dramaMovies);
  }
-}
 
-console.log (ratesAverage(dramaMovies));
+
+console.log(dramaMoviesRate(movies))
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 
@@ -55,8 +55,9 @@ function orderByYear(movies) {
     return sortedMovies.sort((a, b) => {
         if (a.year - b.year === 0){
             return a.title.localeCompare(b.title);
-        } else { }
+        } else { 
         return a.year - b.year || a.title.localeCompare(b.title);
+        }
     });
 }
 
@@ -80,25 +81,29 @@ function orderAlphabetically(movies) {
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
-// “2h 22min”
-
-// Separate h from min - split? [“2h”, “22min”]
-
-// Array with 2 strings 2h and 22 min [“2”, “22”]
-
-// Take h out - string replace h with empty strings [2, 22]
-
-// (parseIn ?) to number?
-
-// *60
-// [120, 22] - reduce
-
-// 144
-
 function turnHoursToMinutes(movies) {
-    const minuteMovies = movies.map((movie) => movie);
-    return minuteMovies.duration.split
+  let newMovies = [...movies];
 
+  newMovies.forEach((movie, i) => {
+    let newDuration = newMovies[i].duration;
+
+    newDuration = newMovies.map((movie) =>
+      movie.duration
+        .slice(0, movie.duration.length - 3)
+        .replace("h", "")
+        .split(" ")
+        .map(Number)
+    );
+
+    newDuration = newDuration.map((duration) => duration[0] * 60 + duration[1]);
+  });
+
+  return newMovies;
 }
 
-// BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
+
+
+console.log(movies.map(movie =>movie.duration))
+
+
+// // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
